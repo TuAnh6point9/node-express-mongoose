@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="auth-intro">
+        <p class="eyebrow">Node Express Mongoose</p>
+        <h1>Article Workspace</h1>
+        <p>
+          Đăng nhập để truy cập vào trang quản lý bài viết của bạn. Bạn có thể đăng nhập bằng tài khoản đã tồn tại hoặc tạo một tài khoản mới để bắt đầu sử dụng ứng dụng.
+        </p>
+      </section>
+
+      <section class="panel auth-card">
+        <div class="panel-heading">
+          <p class="eyebrow">Passport Local</p>
+          <h2>Account</h2>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Authentication mode">
+          <button id="showLoginButton" class="tab-button active" type="button">Login</button>
+          <button id="showSignupButton" class="tab-button" type="button">Signup</button>
+        </div>
+
+        <form id="authForm" class="stacked-form">
+          <label>
+            <span>Username</span>
+            <input name="username" type="text" autocomplete="username"  required>
+          </label>
+          <label>
+            <span>Password</span>
+            <input name="password" type="password" autocomplete="current-password"  required>
+          </label>
+          <button id="authSubmitButton" class="button button-primary" type="submit">Login</button>
+        </form>
+
+        <p id="authMessage" class="message" role="status"></p>
+      </section>
+    </main>
+
+    <script src="/javascripts/auth.js"></script>
+  </body>
+</html>

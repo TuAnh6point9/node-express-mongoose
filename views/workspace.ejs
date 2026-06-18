@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Node Express Mongoose</p>
+        <h1>Article Workspace</h1>
+      </div>
+      <div class="session-box">
+        <span id="sessionStatus">Checking token...</span>
+        <button id="logoutButton" class="button button-secondary" type="button">Log out</button>
+      </div>
+    </header>
+
+    <main class="workspace-layout">
+      <section class="panel article-form-panel">
+        <div class="panel-heading">
+          <p class="eyebrow">Protected Area</p>
+          <h2 id="articleFormTitle">Create article</h2>
+        </div>
+
+        <form id="articleForm" class="stacked-form">
+          <input id="articleId" name="articleId" type="hidden">
+
+          <label>
+            <span>Title</span>
+            <input name="title" type="text" value="Morning Article" minlength="5" required>
+          </label>
+
+          <label>
+            <span>Date</span>
+            <input name="date" type="date" required>
+          </label>
+
+          <label>
+            <span>Tags</span>
+            <input name="tags" type="text" value="news, express" required>
+          </label>
+
+          <label>
+            <span>Text</span>
+            <textarea name="text" rows="6" required>Article text must be longer than ten characters.</textarea>
+          </label>
+
+          <label>
+            <span>Comment</span>
+            <input name="comment" type="text" value="Reviewed from web UI">
+          </label>
+
+          <div class="form-actions">
+            <button id="saveArticleButton" class="button button-primary" type="submit">Create article</button>
+            <button id="cancelEditButton" class="button button-secondary" type="button">Cancel edit</button>
+          </div>
+        </form>
+
+        <p id="articleMessage" class="message" role="status"></p>
+      </section>
+
+      <section class="article-list-section">
+        <div class="list-toolbar">
+          <div>
+            <p class="eyebrow">MongoDB Data</p>
+            <h2>Articles</h2>
+          </div>
+          <button id="refreshButton" class="button button-secondary" type="button">Refresh</button>
+        </div>
+
+        <div id="articleList" class="article-list">
+          <p class="empty-state">Loading protected articles...</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="/javascripts/articles.js"></script>
+  </body>
+</html>

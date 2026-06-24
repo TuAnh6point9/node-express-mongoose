@@ -19,18 +19,24 @@ var port = normalizePort(process.env.PORT || '3002');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create server — HTTP trên Vercel, HTTPS khi local dev.
  */
+var server;
 
-var server = https.createServer({
-  key: fs.readFileSync(path.join(__dirname, '../certs/localhost-key.pem')),
-  cert: fs.readFileSync(path.join(__dirname, '../certs/localhost-cert.pem'))
-}, app);
+if (process.env.VERCEL) {
+  // Vercel tự lo HTTPS ở CDN layer, app chỉ cần HTTP
+  server = http.createServer(app);
+} else {
+  // Local dev: HTTPS với self-signed cert
+  server = https.createServer({
+    key: fs.readFileSync(path.join(__dirname, '../certs/localhost-key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, '../certs/localhost-cert.pem'))
+  }, app);
+}
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
@@ -93,4 +99,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log('Server running at https://localhost:' + addr.port);
 }

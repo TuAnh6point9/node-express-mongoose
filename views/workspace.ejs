@@ -77,6 +77,44 @@
       </section>
     </main>
 
+    <!-- ── Upload File Section ─────────────────────────────────── -->
+    <section class="upload-section">
+      <div class="upload-section-inner">
+        <div class="panel upload-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">File Manager</p>
+              <h2>Upload File</h2>
+            </div>
+            <button id="refreshFilesBtn" class="button button-secondary" type="button">⟳ Refresh</button>
+          </div>
+
+          <form id="uploadForm" class="upload-form">
+            <label class="upload-label">
+              <span>Chọn file (ảnh: jpg/png/gif/webp hoặc .txt — tối đa 5MB)</span>
+              <input id="uploadInput" type="file" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp,text/plain,.txt" required>
+            </label>
+            <button id="uploadBtn" class="button button-primary" type="submit">↑ Upload</button>
+          </form>
+
+          <p id="uploadMessage" class="message" role="status"></p>
+        </div>
+
+        <div class="upload-grid-wrapper">
+          <div class="panel-heading" style="padding: 0 0 4px 0;">
+            <div>
+              <p class="eyebrow">Uploaded Files</p>
+              <h2>File Gallery</h2>
+            </div>
+          </div>
+          <div id="fileGrid" class="file-grid">
+            <p class="upload-empty">Đang tải...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <script src="/javascripts/articles.js"></script>
+    <script src="/javascripts/upload.js"></script>
   </body>
 </html>

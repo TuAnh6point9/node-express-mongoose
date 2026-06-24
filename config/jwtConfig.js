@@ -13,13 +13,18 @@ passport.use(
   new JwtStrategy(opts, async (jwtPayload, done) => {
     try {
       const userId = jwtPayload.id || jwtPayload._id;
-      const user = await User.findById(userId);
 
-      if (user) {
-        return done(null, user);
+      // Chỉ query DB nếu là MongoDB ObjectId hợp lệ (đúng 24 ký tự hex)
+      const isMongoId = /^[a-f\d]{24}$/i.test(String(userId));
+
+      if (isMongoId) {
+        const user = await User.findById(userId);
+        if (user) return done(null, user);
+        return done(null, false);
       }
 
-      return done(null, false);
+      // Google/Facebook ID không phải ObjectId → dùng thẳng payload từ token
+      return done(null, jwtPayload);
     } catch (error) {
       return done(error, false);
     }

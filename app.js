@@ -14,6 +14,7 @@ var usersRouter = require('./routes/users');
 var articleRouter = require('./routes/articleRouter');
 var apiArticleRouter = require('./routes/apiArticleRouter');
 var authRouter = require('./routes/authRoutes');
+var uploadRouter = require('./routes/uploadRouter');
 var sessionConfig = require('./config/sessionConfig');
 
 const mongoose = require('mongoose');
@@ -47,6 +48,8 @@ mongoose.connect(mongoUri)
   .catch((err) => console.error('MongoDB connection error:', err));
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/upload', uploadRouter);
+app.use('/uploads', express.static(require('path').join(__dirname, 'uploads')));
 app.use('/users', usersRouter);
 app.use('/articles', articleRouter);
 app.use('/api/articles', apiArticleRouter);

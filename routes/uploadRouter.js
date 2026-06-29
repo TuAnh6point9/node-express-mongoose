@@ -6,8 +6,14 @@ const { isAuthenticatedJwt } = require('../middleware/auth');
 
 const router = express.Router();
 
-const UPLOAD_DIR = path.join(__dirname, '../uploads');
-if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR);
+const UPLOAD_DIR = process.env.VERCEL
+  ? '/tmp/uploads'
+  : path.join(__dirname, '../uploads');
+try {
+  if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+} catch (e) {
+  console.error('Could not create upload dir:', e.message);
+}
 
 const ALLOWED_TYPES = {
   'image/jpeg': '.jpg',
